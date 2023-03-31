@@ -14,35 +14,35 @@ public class Health : MonoBehaviour
     [SerializeField] private float _framesFuration;
     [SerializeField] private float _numberOfFlashes;
 
-    public float currentHealth { get; private set; }
+    private float _currentHealth;
     private int _minimumHealth = 0;
     private int _demage = 10;
     private int _healthBonus = 10;
 
-
-
     private void Awake()
     {
-        currentHealth = _startingHealth;
+        _currentHealth = _startingHealth;
     }
 
-    public void OnTakeDemage()
+    public void TakeDemage()
     {
-        currentHealth = Mathf.Clamp(currentHealth - _demage, _minimumHealth, _startingHealth);
+        _currentHealth = Mathf.Clamp(_currentHealth - _demage, _minimumHealth, _startingHealth);
 
-        float _relativeHealth = currentHealth / _startingHealth;
+        ChangeHealthPoints?.Invoke(RelativeHealth());
 
-        ChangeHealthPoints?.Invoke(_relativeHealth);
-
-        Debug.Log(currentHealth);
+        Debug.Log(_currentHealth);
     }
 
     public void RecoverHealth()
     {
-        currentHealth = Mathf.Clamp(currentHealth + _healthBonus, _minimumHealth, _startingHealth);
+        _currentHealth = Mathf.Clamp(_currentHealth + _healthBonus, _minimumHealth, _startingHealth);
 
-        float _relativeHealth = currentHealth / _startingHealth;
+        ChangeHealthPoints?.Invoke(RelativeHealth());
+    }
 
-        ChangeHealthPoints?.Invoke(_relativeHealth);
+    private float RelativeHealth()
+    {
+        float _relativeHealth = _currentHealth / _startingHealth;
+        return _relativeHealth;
     }
 }
