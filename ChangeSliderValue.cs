@@ -9,6 +9,8 @@ public class ChangeSliderValue : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
 
+    private int _changeTime = 1;
+
     private void OnEnable()
     {
         Health.ChangeHealthPoints += OnChangeHealthPoints;
@@ -20,6 +22,6 @@ public class ChangeSliderValue : MonoBehaviour
 
     private void OnChangeHealthPoints(float relativeHealth)
     {
-        _slider.DOValue(relativeHealth, 1);
+        _slider.DOValue(relativeHealth, _changeTime);
     }
 }
