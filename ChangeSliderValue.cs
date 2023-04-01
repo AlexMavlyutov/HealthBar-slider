@@ -15,6 +15,7 @@ public class ChangeSliderValue : MonoBehaviour
     {
         Health.ChangeHealthPoints += OnChangeHealthPoints;
     }
+
     private void OnDisable()
     {
         Health.ChangeHealthPoints -= OnChangeHealthPoints;
