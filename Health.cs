@@ -29,8 +29,6 @@ public class Health : MonoBehaviour
         _currentHealth = Mathf.Clamp(_currentHealth - _demage, _minimumHealth, _startingHealth);
 
         ChangeHealthPoints?.Invoke(RelativeHealth());
-
-        Debug.Log(_currentHealth);
     }
 
     public void RecoverHealth()
